@@ -1231,6 +1231,12 @@ create_and_show_popup_menu (struct frame *f, widget_value *first_wv,
 
                              /* Child of win.  */
                              &dummy_window);
+#ifdef HAVE_GTK3
+      /* Use window scaling factor to adjust position for hidpi screens. */
+      xg_scale_x_y_with_widget(GTK_WIDGET(f->output_data.x->ttip_window),
+                               &x,
+                               &y);
+#endif
       unblock_input ();
       popup_x_y.x = x;
       popup_x_y.y = y;

@@ -95,6 +95,10 @@ extern GtkWidget *xg_create_widget (const char *type,
                                     GCallback deactivate_cb,
                                     GCallback highlight_cb);
 
+extern void xg_scale_x_y_with_widget (GtkWidget *widget,
+                                      int *x,
+                                      int *y);
+
 extern void xg_modify_menubar_widgets (GtkWidget *menubar,
                                        struct frame *f,
                                        struct _widget_value *val,
