@@ -749,6 +749,7 @@ xg_show_tooltip (struct frame *f, int root_x, int root_y)
   if (x->ttip_window)
     {
       block_input ();
+      xg_scale_x_y_with_widget(GTK_WIDGET(x->ttip_window), &root_x, &root_y);
       gtk_window_move (x->ttip_window, root_x, root_y);
       gtk_widget_show_all (GTK_WIDGET (x->ttip_window));
       unblock_input ();
@@ -3219,6 +3220,19 @@ xg_update_submenu (GtkWidget *submenu,
 
   return newsub;
 }
+
+/* Scale X and Y.
+   WIDGET the gtk widget from which to get the scaling factor */
+void
+xg_scale_x_y_with_widget (GtkWidget *widget,
+                          int *x,
+                          int *y)
+{
+  gint scale_factor = gtk_widget_get_scale_factor(widget);
+  if(x) *x /= scale_factor;
+  if(y) *y /= scale_factor;
+}
+
 
 /* Update the MENUBAR.
    F is the frame the menu bar belongs to.
