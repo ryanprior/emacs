@@ -2432,6 +2432,8 @@ This function could be in the list `comint-output-filter-functions'."
                         (replace-regexp-in-string "\r" "" string)))
     (when (string-match "^[ \n\r\t\v\f\b\a]+" string)
       (setq string (replace-match "" t t string)))
+    (when (string-match "[\n]+$" string)
+      (setq string (replace-match "" t t string)))
     (let ((comint--prompt-recursion-depth (1+ comint--prompt-recursion-depth)))
       (if (> comint--prompt-recursion-depth 10)
           (message "Password prompt recursion too deep")
